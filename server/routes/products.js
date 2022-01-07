@@ -7,7 +7,7 @@ const {
 } = require("../helpers/onlyusers");
 const {
   onlyAdmins
-} = require('../helpers/onlyAdmins')
+} = require('../helpers/onlyadmins')
 
 const router = require("express").Router();
 

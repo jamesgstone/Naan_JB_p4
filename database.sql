@@ -1,43 +1,84 @@
-create database vacayskey;
+create database whiskyExchange;
 
-use vacayskey;
+use whiskyExchange;
 
 create table users (
-id int auto_increment,
+id int ,
 firstname varchar(255),
 lastname varchar(255),
-username varchar(255), 
+email varchar(255), 
 password varchar(255),
+city varchar(255),
+street varchar(255),
 role varchar(255) default "User",
 primary key (id)
 );
 
-create table vacations (
+create table category (
 id int auto_increment,
-title varchar(255),
-description varchar(255),
-destination varchar(255),
-imgUrl varchar(255),
-startDate date,
-endDate date,
-price int,
+categoryName varchar(255),
 primary key (id)
 );
 
-create table followers (
+create table product (
+id int auto_increment,
+prodName varchar(255),
+catID int,
+imgUrl varchar(255),
+price int,
+foreign key (catID) references category(id),
+primary key (id)
+);
+
+create table cart (
 id int auto_increment,
 userID int,
-vacID int,
+creationTime date,
 foreign key (userID) references users(id),
-foreign key (vacID) references vacations(id),
 primary key (id)
 );
 
-insert into users (firstname, lastname, username, password)
-values ("Jim","Murray","user1", "123"),("Michael","Jackson","user2","123"),("Martine","Nouet","user3","123");
 
-insert into users (firstname, lastname, username, password, role)
-values ("Yossi","Leibman","user4","123","Admin");
+create table cartItem (
+id int auto_increment,
+cartID int,
+prodID int,
+prodQuantity int,
+totalProdPrice int,
+foreign key (prodID) references product(id),
+foreign key (cartID) references cart(id),
+primary key (id)
+);
+
+create table ordering (
+id int auto_increment,
+cartID int,
+userID int,
+totalOrederPrice int,
+prodQuantity int,
+orderCity varchar(255),
+orderStreet varchar(255),
+orderCeationTime date,
+orderDeliveryTime date,
+credit4digit int,
+foreign key (cartID) references cart(id),
+foreign key (userID) references users(id),
+primary key (id)
+);
+
+insert into users (id, firstname, lastname, email, password, city, street)
+values (1111,"Jim","Murray","user1@g.com", "123","new York","1st street"),(2222,"Michael","Jackson","user2@g.com", "123","new York","2nd street"),(3333,"Martine","Nouet","user3@g.com", "123","new York","3rd street");
+
+insert into users (id, firstname, lastname, email, password, city, street, role)
+values (5555,"Yossi","Leibman","user4@g.com","123","new York","5th avenue","Admin");
+
+insert into category (categoryName)
+values ("Highland single malts"),
+("Speyside single malts"),
+("Islay single malts"),
+("Lowland single malts"),
+("Campbeltown single malts"),
+("Island single malts");
 
 insert into vacations(title, destination ,description, imgUrl, startDate, endDate, price)
 values("Campbeltown", "Scotland","visit and tour Campbeltown’s Whisky Distilleries", "https://luxuryscotlandtours.com/wp-content/uploads/2019/08/campbeltown-768x354.jpg","2020-01-01","2020-01-07",2030),

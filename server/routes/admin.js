@@ -3,7 +3,7 @@ const {
 } = require('uuid')
 const {
     onlyAdmins
-} = require('../helpers/onlyAdmins')
+} = require('../helpers/onlyadmins')
 const {
     myQuery,
     query

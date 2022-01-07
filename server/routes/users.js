@@ -1,5 +1,5 @@
 const { myQuery, query } = require('../database/config')
-const { allLoggedUsers } = require('../helpers/allLoggedUsers')
+const { allLoggedUsers } = require('../helpers/allloggedUsers')
 
 const router = require('express').Router()
 

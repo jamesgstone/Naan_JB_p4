@@ -9,20 +9,23 @@ const app = express()
 
 // middlewares
 app.use(express.json()) // req.body
+
 app.use(cors({
     origin: "http://localhost:3000",
     credentials: true
-})) // enable cors
+})) // enable cors - !!!delete for production!!!
+
+
 app.use(session({
-    secret: "blah blah blah",
+    secret: "{31K>f]!NJnST9H^n}hvXhA_b5vdjm",
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 30 // 30 days
+        maxAge: 1000 * 60 * 60 * 24 // 1 day
     }
 })) // req.session
 
-app.use('/follows', require('./routes/follows'))
+app.use('/cart', require('./routes/cart'))
 app.use('/users', require('./routes/users'))
-app.use('/vacations', require('./routes/vacations'))
+app.use('/products', require('./routes/products'))
 app.use('/admin', require('./routes/admin'))
 
 
