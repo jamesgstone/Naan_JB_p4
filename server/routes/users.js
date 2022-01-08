@@ -6,21 +6,21 @@ const router = require('express').Router()
 // open to everyone
 router.post('/login', async (req, res) => {
     try {
-        const { username, password } = req.body
+        const { email, password } = req.body
     
-        if (!username || !password) {
-            return res.status(400).send({ err: true, msg: "missing username or password" })
+        if (!email || !password) {
+            return res.status(400).send({ err: true, msg: "missing email or password" })
         }
     
-        const users = await myQuery( `SELECT * FROM users WHERE username="${username}" AND password="${password}"`)
+        const users = await myQuery( `SELECT * FROM users WHERE email="${email}" AND password="${password}"`)
         if (!users.length) {
-            return res.status(401).send({ err: true, msg: "incorrect username or password" })
+            return res.status(401).send({ err: true, msg: "incorrect email or password" })
         }
     
         const user = users[0];
 
-        req.session.user = { id: user.id, username: user.username, role: user.role, firstname: user.firstname, lastname: user.lastname }
-        res.send({ msg: "you logged in successfully", id: user.id, username: user.username, role: user.role, firstname: user.firstname, lastname: user.lastname})
+        req.session.user = { id: user.id, email: user.email, role: user.role, firstname: user.firstname, lastname: user.lastname }
+        res.send({ msg: "you logged in successfully", id: user.id, email: user.email, role: user.role, firstname: user.firstname, lastname: user.lastname})
         
     } catch (err) {
         console.log(err)
@@ -32,14 +32,14 @@ router.post('/login', async (req, res) => {
 // open to everyone
 router.post('/register', async (req, res) => {
     try {
-        const {firstname, lastname,  username, password } = req.body
+        const {id, firstname, lastname, email, password, city, street} = req.body
     
-        if (!firstname || !lastname || !username || !password) {
-            return res.status(400).send({ err: true, msg: "missing username or password" })
+        if (!id || !firstname || !lastname || !email || !password || !city || !street ) {
+            return res.status(400).send({ err: true, msg: "Missing Info All fields are required" })
         }
     
-        await myQuery( `insert into users (firstname, lastname, username, password)
-        values ("${firstname}","${lastname}","${username}", "${password}")`)
+        await myQuery( `insert into users (id, firstname, lastname, email, password, city, street)
+        values ("${id}","${firstname}","${lastname}","${email}", "${password}","${city}","${street}")`)
            
         res.status(201).send({ msg: "user added successfully" })
         
@@ -56,14 +56,14 @@ router.delete('/logout', (req, res) => {
 })
 
 // open to all registered users
-router.get('/profile', allLoggedUsers, async (req, res) => {
-    try {
-        res.send(await myQuery(`SELECT * FROM followers
-        INNER JOIN vacations ON followers.vacationID = vacations.id WHERE userID = "${req.session.user.username}"`))
+// router.get('/profile', allLoggedUsers, async (req, res) => {
+//     try {
+//         res.send(await myQuery(`SELECT * FROM followers
+//         INNER JOIN vacations ON followers.vacationID = vacations.id WHERE userID = "${req.session.user.email}"`))
         
-    } catch (err) {
-        console.log(err)
-    }
-})
+//     } catch (err) {
+//         console.log(err)
+//     }
+// })
 
 module.exports = router

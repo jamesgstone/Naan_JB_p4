@@ -12,9 +12,11 @@ const {
 const router = require("express").Router();
 
 // open only to users
+
+// get all products
 router.get("/", onlyUsers, async (req, res) => {
   try {
-    const vacation = await myQuery("SELECT * FROM vacations");
+    const vacation = await myQuery("SELECT * FROM product");
     res.send(vacation);
   } catch (err) {
     console.log(err);
@@ -22,12 +24,12 @@ router.get("/", onlyUsers, async (req, res) => {
 });
 
 // get single
-router.get("/:vacationid", onlyUsers, async (req, res) => {
+router.get("/:prodid", onlyUsers, async (req, res) => {
   try {
       const {
-        vacationid
+        prodid
       } = req.params;
-      const data = await myQuery(`SELECT * FROM vacations WHERE id = ${vacationid}`);
+      const data = await myQuery(`SELECT * FROM product WHERE id = ${prodid}`);
       res.send(data);
   } catch (err) {
       console.log(err);
@@ -35,11 +37,11 @@ router.get("/:vacationid", onlyUsers, async (req, res) => {
 });
 
 
-//search
+//search by prodName
 router.get("/search/:searchQuery", onlyUsers, async (req, res) => {
   try {
       const {searchQuery} = req.params;
-      const search = await myQuery(`SELECT * FROM vacations WHERE destination LIKE '%${searchQuery}%'`);
+      const search = await myQuery(`SELECT * FROM product WHERE prodName LIKE '%${searchQuery}%'`);
       console.log(searchQuery)
       res.send(search);
   } catch (err) {
