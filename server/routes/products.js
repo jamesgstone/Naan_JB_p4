@@ -16,8 +16,8 @@ const router = require("express").Router();
 // get all products
 router.get("/", onlyUsers, async (req, res) => {
   try {
-    const vacation = await myQuery("SELECT * FROM product");
-    res.send(vacation);
+    const products = await myQuery("SELECT * FROM product");
+    res.send(products);
   } catch (err) {
     console.log(err);
   }
