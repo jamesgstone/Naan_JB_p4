@@ -49,72 +49,29 @@ router.get("/search/:searchQuery", onlyUsers, async (req, res) => {
   }
 });
 
-// open only to users
-router.post("/follow/:vacationid", onlyUsers, async (req, res) => {
-  try {
-    const {
-      vacationid
-    } = req.params;
-    console.log(req.session.user)
-    const vacationTable = await myQuery(
-      `SELECT * FROM vacations WHERE id = ${vacationid}`
-    );
-    if (!vacationTable) {
-      return res.status(400).send({
-        err: true,
-        msg: "vacation wasn't found"
-      });
-    }
-    await myQuery(
-      `INSERT INTO followers (userID, vacID) VALUES ("${req.session.user.id}", ${vacationid})`
-    );
-    res.send({
-      msg: "You are following the vacation, enjoy it"
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
 
-// open only to users
-router.post("/unfollow/:id", onlyUsers, async (req, res) => {
-  try {
-    const {
-      id
-    } = req.params;
-    await myQuery(`DELETE FROM followers WHERE id = ${id}`);
-    res.send({
-      msg: "you can always follow the vacation again",
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-// insert vacation
-router.post('/', onlyAdmins, async (req, res) => {
+// add new product
+router.post('/new', onlyAdmins, async (req, res) => {
   try {
 
       const {
-          title,
-          destination,
-          description,
+          prodName,
+          catID,
           imgUrl,
-          startDate,
-          endDate,
           price
       } = req.body
 
-      if (!title || !destination || !description || !imgUrl || !startDate || !endDate || !price) {
+      if (!prodName || !catID || !imgUrl || !price) {
           return res.status(400).send({
               err: true,
               msg: "missing some info"
           })
       }
-      await myQuery(`INSERT INTO vacations (title, destination, description, imgUrl, startDate, endDate, price) values ("${title}", "${destination}", "${description}", "${imgUrl}", "${startDate}", "${endDate}", "${price}")`)
+      await myQuery(`insert into product (prodName, catID, imgUrl, price)
+      values("${prodName}", "${catID}","${imgUrl}","${price}")`)
 
       res.send({
-          msg: "vacation added successfully"
+          msg: "product added successfully"
       })
   } catch (err) {
       console.log(err)
@@ -122,31 +79,29 @@ router.post('/', onlyAdmins, async (req, res) => {
   }
 })
 
-router.post('/edit/:vacationID', onlyAdmins, async (req, res) => {
+// edit product
+router.post('/edit/:prodid', onlyAdmins, async (req, res) => {
   try {
     const {
-      vacationID
+      prodid
     } = req.params;
-    const {
-        title,
-        destination,
-        description,
-        imgUrl,
-        startDate,
-        endDate,
-        price
-    } = req.body
+    const  {
+      prodName,
+      catID,
+      imgUrl,
+      price
+  } = req.body
 
-    if (!title || !destination || !description || !imgUrl || !startDate || !endDate || !price) {
+    if (!prodName || !catID || !imgUrl || !price) {
         return res.status(400).send({
             err: true,
             msg: "missing some info"
         })
     }
-    await myQuery(`UPDATE vacations SET title = "${title}",  destination = "${destination}", description = "${description}", imgUrl = "${imgUrl}", startDate = "${startDate}", endDate = "${endDate}", price = "${price}" WHERE id = ${vacationID}`)
+    await myQuery(`UPDATE product SET prodName = "${prodName}",  catID = "${catID}", imgUrl = "${imgUrl}", price = "${price}" WHERE id = ${prodid}`)
 
     res.send({
-        msg: "vacation edited successfully"
+        msg: "product edited successfully"
     })
   } catch (err) {
       console.log(err)
@@ -154,20 +109,62 @@ router.post('/edit/:vacationID', onlyAdmins, async (req, res) => {
   }
 })
 
-// remove vacation
-router.delete('/:vacationID', onlyAdmins, async (req, res) => {
+// remove product
+router.delete('/delete/:prodid', onlyAdmins, async (req, res) => {
   try {
       const {
-          vacationID
+          prodid
       } = req.params
-      await myQuery(`DELETE FROM vacations WHERE id = ${vacationID}`)
-      await myQuery(`DELETE FROM follows WHERE vacID = ${vacationID}`)
+      await myQuery(`DELETE FROM product WHERE id = ${prodid}`)
+
       res.send({
-        msg: "vacation was deleted successfully"
+        msg: "product was deleted successfully"
       })
   } catch (error) {
       console.log(error);
   }
 })
+
+// // open only to users
+// router.post("/follow/:prodid", onlyUsers, async (req, res) => {
+//   try {
+//     const {
+//       prodid
+//     } = req.params;
+//     console.log(req.session.user)
+//     const vacationTable = await myQuery(
+//       `SELECT * FROM vacations WHERE id = ${prodid}`
+//     );
+//     if (!vacationTable) {
+//       return res.status(400).send({
+//         err: true,
+//         msg: "vacation wasn't found"
+//       });
+//     }
+//     await myQuery(
+//       `INSERT INTO followers (userID, vacID) VALUES ("${req.session.user.id}", ${prodid})`
+//     );
+//     res.send({
+//       msg: "You are following the vacation, enjoy it"
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
+
+// // open only to users
+// router.post("/unfollow/:id", onlyUsers, async (req, res) => {
+//   try {
+//     const {
+//       id
+//     } = req.params;
+//     await myQuery(`DELETE FROM followers WHERE id = ${id}`);
+//     res.send({
+//       msg: "you can always follow the vacation again",
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
 
 module.exports = router;
