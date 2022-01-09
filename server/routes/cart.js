@@ -7,14 +7,13 @@ const router = require("express").Router();
 router.get("/", onlyUsers, async (req, res) => {
     try {
         const cartID = await myQuery(`SELECT id FROM cart where userID = ${req.session.user.id}`);
+        // if no cart found open new ->
         if (!cartID.length) {
         await myQuery(`insert into cart (userID)
-        values("${req.session.user.id}"`)
-  
+        values(${req.session.user.id})`)
         res.send({
             msg: "cart was created successfully",
-            cartID: cartID
-        }) 
+         }) 
         }
         res.send(cartID);
     } catch (err) {
@@ -22,22 +21,6 @@ router.get("/", onlyUsers, async (req, res) => {
     }
 });
 
-// add new cart
-router.get('/new/:userID', onlyUsers, async (req, res) => {
-        try {
-            const {
-                userID
-            } = req.params;
-        await myQuery(`insert into cart (userID)
-        values("${userID}"`)
-  
-        res.send({
-            msg: "cart was created successfully"
-        })
-    } catch (err) {
-        console.log(err)
-  
-    }
-  })
+
 
 module.exports = router
