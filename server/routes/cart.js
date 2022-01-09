@@ -70,27 +70,28 @@ router.get("/cartItem", onlyUsers, async (req, res) => {
 });
 // Add item to Cart
 
-router.post('/new', onlyAdmins, async (req, res) => {
+router.get('/addtocart/:prodID', onlyUsers, async (req, res) => {
     try {
-
+        const cartID = req.session.cart.id
         const {
-            prodName,
-            catID,
-            imgUrl,
-            price
-        } = req.body
-
-        if (!prodName || !catID || !imgUrl || !price) {
-            return res.status(400).send({
-                err: true,
-                msg: "missing some info"
+            prodID
+          } = req.params;
+          const productPriceArr =  await myQuery(`SELECT price FROM product WHERE id = ${prodID}`);
+          const productPrice = productPriceArr[0].price;
+          const cartItemIDArr = await myQuery(`SELECT id FROM cartItem WHERE cartID = ${cartID} AND prodID = ${prodID}`);
+          const cartItemID = cartItemIDArr[0].id
+        if (!cartItemIDArr.length) {
+            await myQuery(`insert into cartItem (cartID,prodID, prodQuantity,totalProdPrice)
+            values("${cartID}", "${prodID}",1,${productPrice})`)
+            return  res.send({
+                msg: "product added successfully"
             })
         }
-        await myQuery(`insert into product (prodName, catID, imgUrl, price)
-        values("${prodName}", "${catID}","${imgUrl}","${price}")`)
+
+        await myQuery(`UPDATE cartItem SET prodQuantity = prodQuantity + 1, totalProdPrice = totalProdPrice + ${productPrice} WHERE id = ${cartItemID}`)
 
         res.send({
-            msg: "product added successfully"
+            msg: "product added to cart"
         })
     } catch (err) {
         console.log(err)
