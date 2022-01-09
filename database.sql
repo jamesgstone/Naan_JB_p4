@@ -80,13 +80,6 @@ values ("Highland single malts"),
 ("Campbeltown single malts"),
 ("Island single malts");
 
-insert into vacations(title, destination ,description, imgUrl, startDate, endDate, price)
-values("Campbeltown", "Scotland","visit and tour Campbeltown’s Whisky Distilleries", "https://luxuryscotlandtours.com/wp-content/uploads/2019/08/campbeltown-768x354.jpg","2020-01-01","2020-01-07",2030),
-("ISLAY", "Scotland","visit and tour Islay’s Whisky Distilleries", "https://luxuryscotlandtours.com/wp-content/uploads/2019/08/laphroaig-768x354.jpg","2020-01-07","2020-01-15",2145),
-("HIGHLANDS", "Scotland","visit and tour Oban’s Highland Whisky Distillery", "https://luxuryscotlandtours.com/wp-content/uploads/2019/09/oban-1-768x512.jpg","2020-01-12","2020-01-22",1968),
-("SPEYSIDE", "Scotland","visit and tour Speyside’s Whisky Distilleries", "https://luxuryscotlandtours.com/wp-content/uploads/2019/09/Eriska_Sunset-e1568715163183.jpg","2020-01-01","2020-01-22",3090),
-("Jameson", "Ireland","visit and tour jameson’s Irish Whiskey Distillery", "https://www.thespiritsbusiness.com/content/uploads/2017/03/jameson-distillery.jpg","2020-01-12","2020-01-15",1230),
-("Bushmills", "Ireland","visit and tour Bushmills Irish Whiskey Distillery", "https://www.thespiritsbusiness.com/content/uploads/2019/03/Bushmills-distillery.jpg"  ,"2020-01-15","2020-01-20",1230),
-("Jack Daniel", "USA","visit and tour Jack Daniel’s Tennessee Whiskey Distillery", "https://www.livingthedreamrtw.com/wp-content/uploads/2017/06/DSC05155-600x338-600x338.jpg","2020-01-15","2020-01-27",4570),
-("Jim Beam", " USA","visit and tour Jim Beam’s bourbon Whiskey Distillery", "https://www.roadunraveled.com/wp-content/uploads/2017/07/bourbon-trail-top1.jpg","2020-01-07","2020-01-12",4200),
-("Yamazaki", " Japan","visit and tour Yamazaki’s japanese Whiskey Distillery", "https://whisky.suntory.com/sites/default/files/2019-04/yamazaki-distillery-1.jpg","2020-01-12","2020-01-23",7890);
+insert into product (prodName, catID, imgUrl, price)
+values("ardbeg uigeadail 10",3,"https://www.mashkaot.co.il/files/catalog/item/thumb_big/ardbeg_uigeidail_988x988.jpg", 379),
+("Highland park 18",1,"https://media.whisky.auction/900/74234_0.jpg?id=158755", 660);
