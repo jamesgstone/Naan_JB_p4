@@ -33,7 +33,7 @@ primary key (id)
 create table cart (
 id int auto_increment,
 userID int,
-creationTime date,
+creationTime date default now(),
 foreign key (userID) references users(id),
 primary key (id)
 );
