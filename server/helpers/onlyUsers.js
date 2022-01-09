@@ -1,5 +1,4 @@
 module.exports.onlyUsers = (req, res, next) => {
-    // if (req.session.user && req.session.user.isadmin == false) {
     if (["User","Admin"].includes(req.session.user?.role)) {
         next()
     } else {
