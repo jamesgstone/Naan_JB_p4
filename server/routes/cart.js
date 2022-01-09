@@ -79,7 +79,7 @@ router.get('/addtocart/:prodID', onlyUsers, async (req, res) => {
           const productPriceArr =  await myQuery(`SELECT price FROM product WHERE id = ${prodID}`);
           const productPrice = productPriceArr[0].price;
           const cartItemIDArr = await myQuery(`SELECT id FROM cartItem WHERE cartID = ${cartID} AND prodID = ${prodID}`);
-          const cartItemID = cartItemIDArr[0].id
+          
         if (!cartItemIDArr.length) {
             await myQuery(`insert into cartItem (cartID,prodID, prodQuantity,totalProdPrice)
             values("${cartID}", "${prodID}",1,${productPrice})`)
@@ -87,11 +87,43 @@ router.get('/addtocart/:prodID', onlyUsers, async (req, res) => {
                 msg: "product added successfully"
             })
         }
-
+        const cartItemID = cartItemIDArr[0].id
         await myQuery(`UPDATE cartItem SET prodQuantity = prodQuantity + 1, totalProdPrice = totalProdPrice + ${productPrice} WHERE id = ${cartItemID}`)
 
         res.send({
             msg: "product added to cart"
+        })
+    } catch (err) {
+        console.log(err)
+
+    }
+})
+// Delete item from Cart
+
+router.delete('/deletefromcart/:prodID', onlyUsers, async (req, res) => {
+    try {
+        const cartID = req.session.cart.id
+        const {
+            prodID
+          } = req.params;
+          const productPriceArr =  await myQuery(`SELECT price FROM product WHERE id = ${prodID}`);
+          const productPrice = productPriceArr[0].price;
+          const cartItemIDArr = await myQuery(`SELECT id, prodQuantity FROM cartItem WHERE cartID = ${cartID} AND prodID = ${prodID}`);
+          
+          if (!cartItemIDArr.length) { return  res.send({
+            msg: "No Such product in cart"
+        })}
+        const cartItemQuantity =cartItemIDArr[0].prodQuantity
+        if (cartItemQuantity>1) {
+            await myQuery(`UPDATE cartItem SET prodQuantity = prodQuantity - 1, totalProdPrice = totalProdPrice - ${productPrice} WHERE id = ${cartItemID}`)
+            return  res.send({
+                msg: "one product deleted successfully"
+            })
+        }
+        const cartItemID = cartItemIDArr[0].id
+        await myQuery(`DELETE FROM cartItem WHERE id = ${cartItemID}`)
+        res.send({
+            msg: "product Deleted from cart"
         })
     } catch (err) {
         console.log(err)
