@@ -4,6 +4,8 @@ const { onlyUsers } = require("../helpers/onlyusers");
 const router = require("express").Router();
 
 // open only to users
+
+//get cart id or open new
 router.get("/", onlyUsers, async (req, res) => {
     try {
         const cartID = await myQuery(`SELECT id FROM cart where userID = ${req.session.user.id}`);
@@ -21,6 +23,22 @@ router.get("/", onlyUsers, async (req, res) => {
         console.log(err);
     }
 });
+
+// remove cart
+router.delete('/delete/:cartID', onlyUsers, async (req, res) => {
+    try {
+        const {
+            cartID
+        } = req.params
+        await myQuery(`DELETE FROM cart WHERE id = ${cartID}`)
+  
+        res.send({
+          msg: "cart was deleted successfully"
+        })
+    } catch (error) {
+        console.log(error);
+    }
+  })
 
 
 
