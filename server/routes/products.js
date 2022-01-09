@@ -7,14 +7,17 @@ const {
 } = require("../helpers/onlyusers");
 const {
   onlyAdmins
-} = require('../helpers/onlyadmins')
+} = require('../helpers/onlyadmins');
+const {
+  allLoggedUsers
+} = require('../helpers/allLoggedUsers');
 
 const router = require("express").Router();
 
 // open only to users
 
 // get all products
-router.get("/", onlyUsers, async (req, res) => {
+router.get("/", allLoggedUsers, async (req, res) => {
   try {
     const products = await myQuery("SELECT * FROM product");
     res.send(products);
@@ -24,7 +27,7 @@ router.get("/", onlyUsers, async (req, res) => {
 });
 
 // get single
-router.get("/:prodid", onlyUsers, async (req, res) => {
+router.get("/:prodid", allLoggedUsers, async (req, res) => {
   try {
       const {
         prodid
@@ -38,7 +41,7 @@ router.get("/:prodid", onlyUsers, async (req, res) => {
 
 
 //search by prodName
-router.get("/search/:searchQuery", onlyUsers, async (req, res) => {
+router.get("/search/:searchQuery", allLoggedUsers, async (req, res) => {
   try {
       const {searchQuery} = req.params;
       const search = await myQuery(`SELECT * FROM product WHERE prodName LIKE '%${searchQuery}%'`);
