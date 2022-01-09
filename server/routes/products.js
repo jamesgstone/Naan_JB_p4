@@ -130,46 +130,5 @@ router.delete('/delete/:prodid', onlyAdmins, async (req, res) => {
   }
 })
 
-// // open only to users
-// router.post("/follow/:prodid", onlyUsers, async (req, res) => {
-//   try {
-//     const {
-//       prodid
-//     } = req.params;
-//     console.log(req.session.user)
-//     const vacationTable = await myQuery(
-//       `SELECT * FROM vacations WHERE id = ${prodid}`
-//     );
-//     if (!vacationTable) {
-//       return res.status(400).send({
-//         err: true,
-//         msg: "vacation wasn't found"
-//       });
-//     }
-//     await myQuery(
-//       `INSERT INTO followers (userID, vacID) VALUES ("${req.session.user.id}", ${prodid})`
-//     );
-//     res.send({
-//       msg: "You are following the vacation, enjoy it"
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
-
-// // open only to users
-// router.post("/unfollow/:id", onlyUsers, async (req, res) => {
-//   try {
-//     const {
-//       id
-//     } = req.params;
-//     await myQuery(`DELETE FROM followers WHERE id = ${id}`);
-//     res.send({
-//       msg: "you can always follow the vacation again",
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
 
 module.exports = router;
