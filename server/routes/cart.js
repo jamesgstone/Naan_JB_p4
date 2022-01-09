@@ -6,8 +6,17 @@ const router = require("express").Router();
 // open only to users
 router.get("/", onlyUsers, async (req, res) => {
     try {
-        const follows = await myQuery(`SELECT * FROM cart where userID = ${req.session.user.id}`);
-        res.send(follows);
+        const cartID = await myQuery(`SELECT id FROM cart where userID = ${req.session.user.id}`);
+        if (!cartID.length) {
+        await myQuery(`insert into cart (userID)
+        values("${req.session.user.id}"`)
+  
+        res.send({
+            msg: "cart was created successfully",
+            cartID: cartID
+        }) 
+        }
+        res.send(cartID);
     } catch (err) {
         console.log(err);
     }
