@@ -15,6 +15,7 @@ router.get("/", onlyUsers, async (req, res) => {
             msg: "cart was created successfully",
          }) 
         }
+        // how to return cart id if created new
         res.send(cartID);
     } catch (err) {
         console.log(err);
