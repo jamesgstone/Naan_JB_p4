@@ -1,0 +1,24 @@
+<p>register works!</p>
+<form #form="ngForm" (submit)="_user.register(form.value)">
+    <input 
+        type="text"
+        name="username"
+        placeholder="username"
+        ngModel
+        required
+    >
+    <input 
+        type="password"
+        name="password"
+        placeholder="password"
+        ngModel
+        required
+    >
+    <button
+        [disabled]="form.invalid"
+    >Register</button>
+</form>
+
+<a routerLink="/login">Already have an account?</a>
+
+<p>{{form.value | json}}</p>
