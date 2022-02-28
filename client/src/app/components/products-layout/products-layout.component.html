@@ -1,0 +1,6 @@
+<mat-card class="bg-white">
+<app-categories-bar class="row wrap bg-light mb-4"></app-categories-bar>
+<div class="row wrap">
+<app-single-products class="col-12 col-sm-6 col-md-4 d-flex flex-column" *ngFor="let item of products" [product]="item"></app-single-products>
+</div>
+</mat-card>

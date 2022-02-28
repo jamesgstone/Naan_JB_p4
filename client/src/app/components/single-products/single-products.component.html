@@ -1,0 +1,17 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div></div>
+    <mat-card-title>{{product.prodName}}</mat-card-title>
+    <mat-card-subtitle>{{product.productCategory}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src={{product.imgUrl}} alt="Photo of the product">
+  <mat-card-content>
+    <p>
+     Price: {{product.price}} $
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="accent">Add to Cart</button>
+    <button mat-raised-button color="accent">Quantity</button>
+  </mat-card-actions>
+</mat-card>

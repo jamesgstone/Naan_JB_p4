@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
-import { productInterface } from '../models/product.interface';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class productsService {
+export class ProductsService {
+  baseUrl = 'http://localhost:1000/';
+  constructor(private http : HttpClient) { }
 
-  constructor() { }
-
-  productsArr:productInterface[] = []
-
-  async getproducts(){
-    const res = await fetch('http://localhost:1000/products')
-
-    const data = await res.json()
-    console.log(data)
-    this.productsArr = data
+  getAllCategories() {
+    return this.http.get(`${this.baseUrl}category`).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  getAllProducts() {
+    return this.http.get(`${this.baseUrl}products`).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 }
