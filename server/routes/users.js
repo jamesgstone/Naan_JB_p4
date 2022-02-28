@@ -97,6 +97,21 @@ router.delete('/logout', (req, res) => {
     })
 })
 
+router.get("/:userid", async (req, res) => {
+    try {
+      const {
+        userid
+      } = req.params;
+      const data = await myQuery(`SELECT * FROM users WHERE id = ${userid}`);
+      console.log(data)
+      if (data.length) {
+      res.send(true);}
+      else {res.send(false); }
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
 // open to all registered users
 // router.get('/profile', allLoggedUsers, async (req, res) => {
 //     try {

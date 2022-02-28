@@ -11,7 +11,7 @@ const app = express()
 app.use(express.json()) // req.body
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:4200",
     credentials: true
 })) // enable cors - !!!delete for production!!!
 
@@ -31,6 +31,8 @@ app.use('/products', require('./routes/products'))
 app.use('/category', require('./routes/category'))
 app.use('/order', require('./routes/order'))
 app.use('/admin', require('./routes/admin'))
+app.use(express.static(__dirname + '/public'));
+
 
 
 

@@ -17,7 +17,8 @@ const router = require("express").Router();
 // open only to users
 
 // get all products
-router.get("/", allLoggedUsers, async (req, res) => {
+// router.get("/", allLoggedUsers, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const products = await myQuery("SELECT * FROM product");
     res.send(products);
