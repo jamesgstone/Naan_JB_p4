@@ -92,5 +92,5 @@ values ("Highland single malts"),
 ("Island single malts");
 
 insert into product (prodName, catID, imgUrl, price)
-values("ardbeg uigeadail 10",3,"https://www.mashkaot.co.il/files/catalog/item/thumb_big/ardbeg_uigeidail_988x988.jpg", 379),
-("Highland park 18",1,"https://media.whisky.auction/900/74234_0.jpg?id=158755", 660);
+values("ardbeg uigeadail 10",3,"http://localhost:1000/img/ardbeg_uigeidail.jpg", 379),
+("Highland park 18",1,"http://localhost:1000/img/highland_park_18.jpg", 660);
