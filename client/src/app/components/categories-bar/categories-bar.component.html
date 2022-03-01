@@ -1,3 +1,4 @@
 <div class="bar">
+  <button class="btn btn-primary m-1 btn-small" (click)="getCategory()">All</button>
   <app-category *ngFor="let item of category" [category]="item"></app-category>
 </div>
