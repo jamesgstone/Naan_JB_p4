@@ -12,6 +12,8 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="accent">Add to Cart</button>
-    <button mat-raised-button color="accent">Quantity</button>
+    <span>Quantity</span>
+    <input type="number" id="Quantity" name="Quantity"
+       min="1" max="15" [defaultValue]="1">
   </mat-card-actions>
 </mat-card>
