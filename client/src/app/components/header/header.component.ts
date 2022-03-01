@@ -17,7 +17,7 @@ isSearching = false;
 
 search() {
   this.isSearching = true
-  
+
 
 }
 

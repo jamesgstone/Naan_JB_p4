@@ -92,12 +92,12 @@ values ("Highland single malts"),
 ("Island single malts");
 
 insert into product (prodName, catID, imgUrl, price)
-values("ardbeg uigeadail 10",3,"http://localhost:1000/img/ardbeg_uigeidail.jpg", 379),
+values("Ardbeg uigeadail 10",3,"http://localhost:1000/img/ardbeg_uigeidail.jpg", 379),
 ("Balvenie Malt 40 Years Old", 2,"http://localhost:1000/img/balvenie_malt_40y.jpg",5727),
-("glenmorangie 1975 Tain L'Hermitage", 1,"http://localhost:1000/img/glenmorangie-1975.jpg",2177),
+("Glenmorangie 1975 Tain L'Hermitage", 1,"http://localhost:1000/img/glenmorangie-1975.jpg",2177),
 ("Lagavulin 16 Year Old", 3,"http://localhost:1000/img/LAGAVULIN_16.jpg",217),
 ("Macallan 18yo 1981 Bottling", 2,"http://localhost:1000/img/the-macallan-18-year-old-1981-whisky.jpg",4360),
-("bladnoch 29 year old", 4,"http://localhost:1000/img/bladnoch-29-year-old.jpg",5673),
+("Bladnoch 29 year old", 4,"http://localhost:1000/img/bladnoch-29-year-old.jpg",5673),
 ("Auchentoshan 42 Year Old 1965", 4,"http://localhost:1000/img/auchentoshan-42.jpg",4536),
 ("Glen Scotia 25 Years Old", 5,"http://localhost:1000/img/Glen_Scotia_25.jpg",523),
 ("Springbank 21 year old", 5,"http://localhost:1000/img/Springbank_21.jpg",158),
