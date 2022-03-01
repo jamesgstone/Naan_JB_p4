@@ -1,8 +1,16 @@
+<!-- Header -->
 <app-header></app-header>
-<div></div>
-<app-products-layout></app-products-layout>
-<!-- Resources -->
+<!-- Body -->
+<div class="grid-container">
+  <div class="grid-item item-1">
+    <app-cart></app-cart>
+  </div>
+  <div class="grid-item item-2">
+    <app-products-layout></app-products-layout>
+  </div>
+</div>
+<!-- routes -->
+<router-outlet></router-outlet>
+<!-- Footer -->
 <h2>Resources</h2>
 <p>Here are some links to help you get started:</p>
-
-<router-outlet></router-outlet>

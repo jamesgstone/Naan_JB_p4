@@ -1,0 +1,16 @@
+.item-1 {
+  grid-area: item1;
+
+}
+.item-2 {
+  grid-area: item2;
+}
+.grid-container{
+  width: 100vr;
+  display: grid;
+  gap: 2px ;
+  grid-template-areas: "item1 item2 item2";
+}
+.grid-item {
+  width: auto;
+}
