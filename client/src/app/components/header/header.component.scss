@@ -1,12 +1,13 @@
 
 .main {
-  height:60px;
+  height:70px;
   box-sizing: border-box;
   border: 1px solid gainsboro;
   border-radius: 10px;
   display:flex;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
+  padding: auto;
 }
 img{
   size: 50px 50px
