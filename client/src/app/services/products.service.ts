@@ -8,6 +8,9 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductsService {
+  static getProducts(catId: any) {
+    throw new Error('Method not implemented.');
+  }
   baseUrl = 'http://localhost:1000/';
   constructor(private http : HttpClient) { }
 
@@ -18,8 +21,8 @@ export class ProductsService {
       })
     );
   }
-  getAllProducts() {
-    return this.http.get(`${this.baseUrl}products`).pipe(
+  getAllProducts(catId: string) {
+    return this.http.get(`${this.baseUrl}products${catId}`).pipe(
       map((res: any) => {
         return res;
       })

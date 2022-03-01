@@ -11,13 +11,14 @@ export class ProductsLayoutComponent implements OnInit {
   products: Product[] = [];
   success: string | undefined;
   error: any;
+  catId =''
   constructor(private productService: ProductsService) {}
 
   ngOnInit() {
-    this.getProducts();
+    this.getProducts(this.catId);
   }
-  getProducts(): void {
-    this.productService.getAllProducts().subscribe(
+  getProducts(catId: string): void {
+    this.productService.getAllProducts(catId).subscribe(
       (data: Product[]) => {
         this.products = data;
         this.success = 'Operation success';

@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ProductsService } from '../../services/products.service';
+
 
 @Component({
   selector: 'app-category',
@@ -15,5 +17,8 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+changeCategory(catId: any) {
+console.log(catId)
+ProductsService.getProducts(catId)
+}
 }
