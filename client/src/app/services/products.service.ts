@@ -28,4 +28,11 @@ export class ProductsService {
       })
     );
   }
+//Search product/s
+	// GET	http://localhost:1000/products/search/:searchQuery
+  // Request > http://localhost:1000/products/search/a
+
+  
+//
+//
 }
