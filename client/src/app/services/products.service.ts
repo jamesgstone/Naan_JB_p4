@@ -28,11 +28,11 @@ export class ProductsService {
       })
     );
   }
-//Search product/s
-	// GET	http://localhost:1000/products/search/:searchQuery
-  // Request > http://localhost:1000/products/search/a
-
-  
-//
-//
+  getSearchProducts(catId: string) {
+    return this.http.get(`${this.baseUrl}products/search/${searchQuery}`).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
 }
