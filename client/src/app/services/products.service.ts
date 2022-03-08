@@ -28,7 +28,7 @@ export class ProductsService {
       })
     );
   }
-  getSearchProducts(catId: string) {
+  getSearchProducts(searchQuery: string) {
     return this.http.get(`${this.baseUrl}products/search/${searchQuery}`).pipe(
       map((res: any) => {
         return res;

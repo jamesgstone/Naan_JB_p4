@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  baseUrl = 'http://localhost:1000/';
+  constructor(private http : HttpClient) { }
 
 
 //   login
@@ -44,18 +47,15 @@ export class AuthService {
 // }
 
 // Check if ID exist in DB
-// GET	http://localhost:1000/users/:userid
-// Request >
-// http://localhost:1000/users/1111
-// 			Response >
-// [
 //   If no ID in DB -> false
 //   If ID already in DB -> true
-// ]
-
-
-
-
+getCheckId(userid: string) {
+  return this.http.get(`${this.baseUrl}users/${userid}`).pipe(
+    map((res: any) => {
+      return res;
+    })
+  );
+}
 
 // logout
 // DEL	http://localhost:1000/users/logout
