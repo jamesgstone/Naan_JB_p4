@@ -84,12 +84,12 @@ insert into users (id, firstname, lastname, email, password, cityID, street, rol
 values (5555,"Yossi","Leibman","user4@g.com","123",1,"5th avenue","Admin");
 
 insert into category (categoryName)
-values ("Highland single malts"),
-("Speyside single malts"),
-("Islay single malts"),
-("Lowland single malts"),
-("Campbeltown single malts"),
-("Island single malts");
+values ("Highland"),
+("Speyside"),
+("Islay"),
+("Lowland"),
+("Campbeltown"),
+("Island");
 
 insert into product (prodName, catID, imgUrl, price)
 values("Ardbeg uigeadail 10",3,"http://localhost:1000/img/ardbeg_uigeidail.jpg", 379),
