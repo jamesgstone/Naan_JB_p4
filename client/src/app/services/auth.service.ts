@@ -27,7 +27,13 @@ export class AuthService {
 //  "firstname": "Jim",
 //  "lastname": "Murray"
 // }
-
+store(login: Login) {
+  return this.http.post(`${this.baseUrl}users/login`, { data: login }).pipe(
+    map((res: any) => {
+      return res['data'];
+    })
+  );
+}
 
 // Register
 // POST	http://localhost:1000/users/register
