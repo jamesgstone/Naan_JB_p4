@@ -1,0 +1,90 @@
+<form class="example-form" [formGroup]="regForm">
+
+	<div *ngIf="step == 1">
+
+		<div>
+			<input pInputText placeholder="Insert you ID number" name="id" formControlName="id">
+
+			<span class="mx-2" *ngIf="regForm.controls['id'].invalid && (regForm.controls['id'].dirty || regForm.controls['id'].touched)">
+				<p-message *ngIf="regForm.controls['id'].errors?.['required']" severity="error" text="ID is required."></p-message>
+			</span>
+		</div>
+
+
+		<div class="mt-3">
+			<input pInputText placeholder="Insert a valid email" name="email" formControlName="email">
+
+			<span class="mx-2" *ngIf="regForm.controls['email'].invalid && (regForm.controls['email'].dirty || regForm.controls['email'].touched)">
+				<p-message *ngIf="regForm.controls['email'].errors?.['required']" severity="error" text="Email is required."></p-message>
+				<p-message *ngIf="regForm.controls['email'].errors?.['email']" severity="error" text="Insert a valid email"></p-message>
+			</span>
+		</div>
+
+
+		<div class="mt-3">
+			<input pInputText placeholder="Password" name="password" formControlName="password">
+
+			<span class="mx-2" *ngIf="regForm.controls['password'].invalid && (regForm.controls['password'].dirty || regForm.controls['password'].touched)">
+				<p-message *ngIf="regForm.controls['password'].errors?.['required']" severity="error" text="Password is required."></p-message>
+			</span>
+		</div>
+
+
+		<div class="mt-3">
+			<input pInputText placeholder="password confirmation" name="passwordConfirmation" formControlName="passwordConfirmation">
+
+			<span class="mx-2" *ngIf="regForm.controls['passwordConfirmation'].invalid && (regForm.controls['passwordConfirmation'].dirty || regForm.controls['passwordConfirmation'].touched)">
+				<p-message *ngIf="regForm.controls['passwordConfirmation'].errors?.['required']" severity="error" text="Password confirmation is required."></p-message>
+				<p-message *ngIf="regForm.controls['passwordConfirmation'].errors?.['mismatch']" severity="error" text="Password and confirmation do not match."></p-message>
+			</span>
+		</div>
+
+
+		<button pButton class="mt-4" type="button" label="Continue" (click)="goStep2()" [disabled]="firstStepInvalid()"></button>
+
+	</div>
+
+	<div *ngIf="step == 2">
+
+		<div>
+			<input pInputText placeholder="Select city" name="cityId" formControlName="cityId">
+
+			<span class="mx-2" *ngIf="regForm.controls['cityId'].invalid && (regForm.controls['cityId'].dirty || regForm.controls['cityId'].touched)">
+				<p-message *ngIf="regForm.controls['cityId'].errors?.['required']" severity="error" text="City is required."></p-message>
+			</span>
+		</div>
+
+
+		<div class="mt-3">
+			<input pInputText placeholder="Insert your address" name="street" formControlName="street">
+
+			<span class="mx-2" *ngIf="regForm.controls['street'].invalid && (regForm.controls['street'].dirty || regForm.controls['street'].touched)">
+				<p-message *ngIf="regForm.controls['street'].errors?.['required']" severity="error" text="street is required."></p-message>
+			</span>
+		</div>
+
+
+		<div class="mt-3">
+			<input pInputText placeholder="firstName" name="firstName" formControlName="firstName">
+
+			<span class="mx-2" *ngIf="regForm.controls['firstName'].invalid && (regForm.controls['firstName'].dirty || regForm.controls['firstName'].touched)">
+				<p-message *ngIf="regForm.controls['firstName'].errors?.['required']" severity="error" text="firstName is required."></p-message>
+			</span>
+		</div>
+
+
+		<div class="mt-3">
+			<input pInputText placeholder="lastName" name="lastName" formControlName="lastName">
+
+			<span class="mx-2" *ngIf="regForm.controls['lastName'].invalid && (regForm.controls['lastName'].dirty || regForm.controls['lastName'].touched)">
+				<p-message *ngIf="regForm.controls['lastName'].errors?.['required']" severity="error" text="lastName is required."></p-message>
+			</span>
+		</div>
+
+
+		<button pButton class="mt-4" type="button" label="Back" (click)="goStep1()"></button>
+		<button pButton class="mt-4" type="button" label="Register" (click)="register()" [disabled]="!regForm.valid"></button>
+
+	</div>
+
+</form>

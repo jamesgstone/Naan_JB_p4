@@ -15,6 +15,8 @@ import { CategoryComponent } from './components/category/category.component';
 import { CategoriesBarComponent } from './components/categories-bar/categories-bar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CartComponent } from './components/cart/cart.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { CartComponent } from './components/cart/cart.component';
     CategoryComponent,
     CategoriesBarComponent,
     HeaderComponent,
-    CartComponent
+    CartComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
