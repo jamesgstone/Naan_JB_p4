@@ -26,7 +26,14 @@ export class AuthService {
 //  "role": "User",
 //  "firstname": "Jim",
 //  "lastname": "Murray"
+
+//  addLogin(person:Person): Observable<any> {
+//   const headers = { 'content-type': 'application/json'}
+//   const body=JSON.stringify(person);
+//   console.log(body)
+//   return this.http.post(this.baseURL + 'people', body,{'headers':headers})
 // }
+
 store(login: Login) {
   return this.http.post(`${this.baseUrl}users/login`, { data: login }).pipe(
     map((res: any) => {
@@ -69,6 +76,18 @@ getCheckId(userid: string) {
 // {
 //     "msg": "disconnected successfully"
 // }
+logOut() {
+return this.http.delete(`${this.baseUrl}logout`)
+.subscribe({
+    next: data => {
+        this.status = 'Delete successful';
+    },
+    error: error => {
+        this.errorMessage = error.message;
+        console.error('There was an error!', error);
+    }
+});
+}
 
 
 
